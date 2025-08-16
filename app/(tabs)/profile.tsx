@@ -1,4 +1,4 @@
-import { AntDesign } from '@expo/vector-icons';
+import AntDesign from "@react-native-vector-icons/ant-design";
 import { Stack } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ClassPicker from '~/components/ClassPicker';

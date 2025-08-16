@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { AntDesign } from '@expo/vector-icons';
+import AntDesign from "@react-native-vector-icons/ant-design";
 
 const ClassPicker = () => {
   const placeholder = {

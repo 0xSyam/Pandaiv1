@@ -18,8 +18,8 @@ export default function RootLayout() {
         const value = await AsyncStorage.getItem('hasCompletedOnboarding');
         if (value !== null) {
           setHasCompletedOnboarding(true);
-          if (window.location.pathname !== '/leaderboard') {
-            router.replace('/(tabs)');
+          if (window.location.pathname !== '/leaderboard' && window.location.pathname !== '/notification') {
+              router.replace('/(tabs)');
           }
         } else {
           router.replace('/(onboarding)');

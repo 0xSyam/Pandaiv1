@@ -1,5 +1,6 @@
 import { Stack, useRouter } from 'expo-router';
 import { ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 // Dummy data for the cards
 const recommendedData = [
@@ -7,13 +8,13 @@ const recommendedData = [
     title: 'Matematika',
     subtitle: 'Dasar Aljabar',
     tags: ['Full Time', 'Intensif'],
-    icon: '⭐️', // Placeholder for icon
+    icon: 'star', // Placeholder for icon
   },
   {
     title: 'Biologi',
     subtitle: 'Sistem Ekresi',
     tags: ['Full Time'],
-    icon: '⭐️', // Placeholder for icon
+    icon: 'star', // Placeholder for icon
   },
 ];
 
@@ -34,13 +35,13 @@ export default function Home() {
         <View style={styles.header}>
           <Text style={styles.headerText}>Create A Better Future{'\n'}For Your Self Today</Text>
           <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/notification')}>
-            <Text>📄</Text>
+            <Icon name="bells" size={24} color="white" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.searchSection}>
           <View style={styles.searchInputContainer}>
-            <Text style={styles.searchIcon}>🔍</Text>
+            <Icon name="search1" size={20} color="#BEC0C7" />
             <TextInput
               style={styles.searchInput}
               placeholder="Cari Materi"
@@ -48,7 +49,7 @@ export default function Home() {
             />
           </View>
           <TouchableOpacity style={styles.filterButton}>
-            <Text>📊</Text>
+            <Icon name="filter" size={24} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -63,7 +64,7 @@ export default function Home() {
             {recommendedData.map((item, index) => (
               <View key={index} style={styles.recommendedCard}>
                 <View style={styles.cardIconContainer}>
-                  <Text>{item.icon}</Text>
+                  <Icon name={item.icon} size={24} color="#FFD700" />
                 </View>
                 <View style={styles.cardTags}>
                   {item.tags.map((tag, tagIndex) => (
@@ -146,9 +147,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginRight: 15,
     height: 60,
-  },
-  searchIcon: {
-    marginRight: 10,
   },
   searchInput: {
     flex: 1,

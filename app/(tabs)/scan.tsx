@@ -1,22 +1,3 @@
-import { Stack } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import ScanScreen from '../scan';
 
-import { ScreenContent } from '~/components/ScreenContent';
-
-export default function Scan() {
-  return (
-    <>
-      <Stack.Screen options={{ title: 'Scan' }} />
-      <View style={styles.container}>
-        <ScreenContent path="app/(tabs)/scan.tsx" title="Scan" />
-      </View>
-    </>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});
+export default ScanScreen;

@@ -114,7 +114,7 @@ export default function MaterialDetail() {
     <View style={styles.contentContainer}>
       <View style={styles.quizCard}>
         <View style={styles.quizHeader}>
-          <Icon name="Trophy" size={32} color="#4F46E5" />
+          <Icon name="Trophy" size={32} color="#406AFF" />
           <Text style={styles.quizTitle}>Uji Pemahaman</Text>
         </View>
         
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
   },
   activeTab: {
-    borderBottomColor: '#4F46E5',
+    borderBottomColor: '#406AFF',
   },
   tabText: {
     fontSize: 14,
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     color: '#6B7280',
   },
   activeTabText: {
-    color: '#4F46E5',
+    color: '#406AFF',
     fontWeight: '600',
   },
   scrollView: {
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
   progressPercentage: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#4F46E5',
+    color: '#406AFF',
   },
   progressBar: {
     height: 8,
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 4,
   },
   progressInfo: {
@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     marginRight: 12,
   },
   pointTitle: {
@@ -401,12 +401,12 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     borderLeftWidth: 3,
-    borderLeftColor: '#4F46E5',
+    borderLeftColor: '#406AFF',
   },
   examplesLabel: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#4F46E5',
+    color: '#406AFF',
     marginBottom: 6,
   },
   exampleText: {
@@ -482,7 +482,7 @@ const styles = StyleSheet.create({
   quizStatNumber: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#4F46E5',
+    color: '#406AFF',
   },
   quizStatLabel: {
     fontSize: 12,
@@ -490,7 +490,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   startQuizButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 12,
     paddingVertical: 16,
     paddingHorizontal: 32,
@@ -538,7 +538,7 @@ const styles = StyleSheet.create({
   },
   exerciseTypeText: {
     fontSize: 12,
-    color: '#4F46E5',
+    color: '#406AFF',
     fontWeight: '500',
   },
   startExerciseButton: {

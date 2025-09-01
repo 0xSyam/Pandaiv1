@@ -98,7 +98,7 @@ export default function SubjectDetail() {
                           { 
                             width: `${topic.progress}%`,
                             backgroundColor: topic.progress === 100 ? '#10B981' : 
-                                          topic.progress >= 50 ? '#4F46E5' : 
+                                          topic.progress >= 50 ? '#406AFF' : 
                                           topic.progress > 0 ? '#F59E0B' : '#E5E7EB'
                           }
                         ]} 
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   progressBadgeText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#4F46E5',
+    color: '#406AFF',
   },
   statsRow: {
     flexDirection: 'row',
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   primaryAction: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     flex: 1,
     paddingHorizontal: 16,
   },

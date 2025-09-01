@@ -95,7 +95,7 @@ export default function QuizScreen() {
   const renderStartScreen = () => (
     <View style={styles.startContainer}>
       <View style={styles.startCard}>
-        <Icon name="Trophy" size={64} color="#4F46E5" />
+        <Icon name="Trophy" size={64} color="#406AFF" />
         <Text style={styles.startTitle}>{quiz.title}</Text>
         <Text style={styles.startDescription}>{quiz.description}</Text>
         
@@ -255,7 +255,7 @@ export default function QuizScreen() {
             {showExplanation && (
               <View style={styles.explanationContainer}>
                 <View style={styles.explanationHeader}>
-                  <Icon name="infocirlceo" size={20} color="#4F46E5" />
+                  <Icon name="infocirlceo" size={20} color="#406AFF" />
                   <Text style={styles.explanationTitle}>Penjelasan</Text>
                 </View>
                 <Text style={styles.explanationText}>{question.explanation}</Text>
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   startButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 12,
     paddingVertical: 16,
     paddingHorizontal: 32,
@@ -414,7 +414,7 @@ const styles = StyleSheet.create({
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 2,
   },
   timeText: {
@@ -454,7 +454,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   selectedOption: {
-    borderColor: '#4F46E5',
+    borderColor: '#406AFF',
     backgroundColor: '#EEF2FF',
   },
   correctOption: {
@@ -479,7 +479,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   selectedIndicator: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
   },
   correctIndicator: {
     backgroundColor: '#10B981',
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   selectedOptionText: {
-    color: '#4F46E5',
+    color: '#406AFF',
     fontWeight: '500',
   },
   correctOptionText: {
@@ -515,7 +515,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
     borderRadius: 12,
     borderLeftWidth: 4,
-    borderLeftColor: '#4F46E5',
+    borderLeftColor: '#406AFF',
   },
   explanationHeader: {
     flexDirection: 'row',
@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
   explanationTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#4F46E5',
+    color: '#406AFF',
     marginLeft: 8,
   },
   explanationText: {
@@ -560,7 +560,7 @@ const styles = StyleSheet.create({
     color: '#9CA3AF',
   },
   nextButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
@@ -597,7 +597,7 @@ const styles = StyleSheet.create({
   scoreText: {
     fontSize: 48,
     fontWeight: '700',
-    color: '#4F46E5',
+    color: '#406AFF',
     marginBottom: 8,
   },
   resultDescription: {
@@ -632,19 +632,19 @@ const styles = StyleSheet.create({
   reviewButton: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#4F46E5',
+    borderColor: '#406AFF',
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',
   },
   reviewButtonText: {
-    color: '#4F46E5',
+    color: '#406AFF',
     fontSize: 14,
     fontWeight: '600',
   },
   retryButton: {
     flex: 1,
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',

@@ -161,19 +161,19 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   radioButtonSelected: {
-    borderColor: '#4F46E5',
-    backgroundColor: '#4F46E5',
+    borderColor: '#406AFF',
+    backgroundColor: '#406AFF',
   },
   difficultyText: {
     fontSize: 14,
     color: '#6B7280',
   },
   selectedDifficultyText: {
-    color: '#4F46E5',
+    color: '#406AFF',
     fontWeight: '500',
   },
   generateButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',

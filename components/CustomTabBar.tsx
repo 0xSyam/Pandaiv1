@@ -1,4 +1,5 @@
 import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { Link } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
@@ -56,7 +57,7 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
               <TouchableOpacity
                 onPress={onPress}
                 style={{
-                  backgroundColor: '#406AFF',
+                  backgroundColor: isFocused ? '#406AFF' : '#406AFF',
                   width: 79.787,
                   height: 79.787,
                   borderRadius: 93.867,
@@ -65,10 +66,18 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
                   marginBottom: 70,
                   padding: 9.387,
                 }}>
-                <Image
-                  source={require('~/assets/scan.png')}
-                  style={{ width: 30, height: 30, tintColor: 'white' }}
-                />
+                {isFocused ? (
+                  <MaterialIcons
+                    name="mic"
+                    size={30}
+                    color="white"
+                  />
+                ) : (
+                  <Image
+                    source={require('~/assets/scan.png')}
+                    style={{ width: 30, height: 30, tintColor: 'white' }}
+                  />
+                )}
               </TouchableOpacity>
             </View>
           );

@@ -68,7 +68,7 @@ export default function ExerciseScreen() {
 
       <View style={styles.content}>
         <View style={styles.introCard}>
-          <Icon name="edit" size={48} color="#4F46E5" />
+          <Icon name="edit" size={48} color="#406AFF" />
           <Text style={styles.introTitle}>{exercise.title}</Text>
           <Text style={styles.introDescription}>{exercise.description}</Text>
         </View>
@@ -92,7 +92,7 @@ export default function ExerciseScreen() {
                       category === 'Benar/Salah' ? 'checkcircle' : 'questioncircle'
                     } 
                     size={24} 
-                    color="#4F46E5" 
+                    color="#406AFF" 
                   />
                 </View>
                 <Text style={styles.categoryName}>{category}</Text>
@@ -187,7 +187,7 @@ export default function ExerciseScreen() {
               color={
                 showCorrect ? "#10B981" :
                 showWrong ? "#EF4444" :
-                isSelected ? "#4F46E5" : "#6B7280"
+                isSelected ? "#406AFF" : "#6B7280"
               } 
             />
             <Text style={[
@@ -270,7 +270,7 @@ export default function ExerciseScreen() {
             {showResult && exercise.explanation && (
               <View style={styles.explanationContainer}>
                 <View style={styles.explanationHeader}>
-                  <Icon name="infocirlceo" size={20} color="#4F46E5" />
+                  <Icon name="infocirlceo" size={20} color="#406AFF" />
                   <Text style={styles.explanationTitle}>Penjelasan</Text>
                 </View>
                 <Text style={styles.explanationText}>{exercise.explanation}</Text>
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   allExerciseButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
@@ -456,7 +456,7 @@ const styles = StyleSheet.create({
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     borderRadius: 2,
   },
   difficultyBadge: {
@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
   categoryBadgeText: {
     fontSize: 12,
     fontWeight: '500',
-    color: '#4F46E5',
+    color: '#406AFF',
   },
   questionText: {
     fontSize: 16,
@@ -517,7 +517,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   selectedOption: {
-    borderColor: '#4F46E5',
+    borderColor: '#406AFF',
     backgroundColor: '#EEF2FF',
   },
   correctOption: {
@@ -542,7 +542,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   selectedIndicator: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
   },
   correctIndicator: {
     backgroundColor: '#10B981',
@@ -565,7 +565,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   selectedOptionText: {
-    color: '#4F46E5',
+    color: '#406AFF',
     fontWeight: '500',
   },
   correctOptionText: {
@@ -588,7 +588,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   selectedTrueFalse: {
-    borderColor: '#4F46E5',
+    borderColor: '#406AFF',
     backgroundColor: '#EEF2FF',
   },
   correctTrueFalse: {
@@ -605,7 +605,7 @@ const styles = StyleSheet.create({
     color: '#6B7280',
   },
   selectedTrueFalseText: {
-    color: '#4F46E5',
+    color: '#406AFF',
   },
   correctTrueFalseText: {
     color: '#10B981',
@@ -631,12 +631,12 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     borderLeftWidth: 3,
-    borderLeftColor: '#4F46E5',
+    borderLeftColor: '#406AFF',
   },
   sampleAnswerTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#4F46E5',
+    color: '#406AFF',
     marginBottom: 8,
   },
   sampleAnswerText: {
@@ -650,7 +650,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
     borderRadius: 12,
     borderLeftWidth: 4,
-    borderLeftColor: '#4F46E5',
+    borderLeftColor: '#406AFF',
   },
   explanationHeader: {
     flexDirection: 'row',
@@ -660,7 +660,7 @@ const styles = StyleSheet.create({
   explanationTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#4F46E5',
+    color: '#406AFF',
     marginLeft: 8,
   },
   explanationText: {
@@ -706,7 +706,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   nextButton: {
-    backgroundColor: '#4F46E5',
+    backgroundColor: '#406AFF',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,

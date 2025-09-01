@@ -63,6 +63,39 @@ export default function TabLayout() {
           headerShadowVisible: false,
         }}
       />
+      {/* Hidden tabs - not shown in tab bar but maintain tab context */}
+      <Tabs.Screen
+        name="classroom"
+        options={{
+          title: 'Classroom',
+          headerShown: false,
+          href: null, // Completely hide from router
+        }}
+      />
+      <Tabs.Screen
+        name="exam-room"
+        options={{
+          title: 'Exam Room',
+          headerShown: false,
+          href: null, // Completely hide from router
+        }}
+      />
+      <Tabs.Screen
+        name="random-funfact"
+        options={{
+          title: 'Random Funfact',
+          headerShown: false,
+          href: null, // Completely hide from router
+        }}
+      />
+      <Tabs.Screen
+        name="menu"
+        options={{
+          title: 'Menu Stats',
+          headerShown: false,
+          href: null, // Completely hide from router
+        }}
+      />
     </Tabs>
   );
 }

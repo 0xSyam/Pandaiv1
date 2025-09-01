@@ -1,4 +1,4 @@
-import AntDesign from "react-native-vector-icons/AntDesign";
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Link } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
@@ -21,81 +21,91 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
   return (
     <View style={{ flexDirection: 'row', height: 90 }}>
       <TabBarBackground />
-      {state.routes.map((route: any, index: number) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+      {state.routes
+        .filter((route: any) => {
+          // Hide specific tabs that shouldn't appear in tab bar
+          const hiddenTabs = ['classroom', 'exam-room', 'random-funfact', 'menu'];
+          return !hiddenTabs.includes(route.name);
+        })
+        .map((route: any, index: number) => {
+          // Recalculate index for filtered routes
+          const originalIndex = state.routes.findIndex((r: any) => r.key === route.key);
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+                ? options.title
+                : route.name;
 
-        const isFocused = state.index === index;
+          const isFocused = state.index === originalIndex;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
 
-        if (route.name === 'scan') {
-          return (
-            <View
-              key={route.key}
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <TouchableOpacity
-                onPress={onPress}
+          if (route.name === 'scan') {
+            return (
+              <View
+                key={route.key}
                 style={{
-                  backgroundColor: '#406AFF',
-                  width: 79.787,
-                  height: 79.787,
-                  borderRadius: 93.867,
-                  justifyContent: 'center',
+                  flex: 1,
                   alignItems: 'center',
-                  marginBottom: 70,
-                  padding: 9.387,
+                  justifyContent: 'center',
                 }}>
-                <Image
-                  source={require('~/assets/scan.png')}
-                  style={{ width: 30, height: 30, tintColor: 'white' }}
-                />
-              </TouchableOpacity>
-            </View>
-          );
-        }
+                <TouchableOpacity
+                  onPress={onPress}
+                  style={{
+                    backgroundColor: '#406AFF',
+                    width: 79.787,
+                    height: 79.787,
+                    borderRadius: 93.867,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 70,
+                    padding: 9.387,
+                  }}>
+                  <Image
+                    source={require('~/assets/scan.png')}
+                    style={{ width: 30, height: 30, tintColor: 'white' }}
+                  />
+                </TouchableOpacity>
+              </View>
+            );
+          }
 
-        return (
-          <TouchableOpacity
-            key={route.key}
-            onPress={onPress}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <AntDesign
-              name={
-                label === 'Home'
-                  ? 'home'
-                  : label === 'Learn'
-                  ? 'book'
-                  : label === 'Calendar'
-                  ? 'calendar'
-                  : 'user'
-              }
-              size={28}
-              color={isFocused ? '#406AFF' : '#757575'}
-            />
-            <Text style={{ color: isFocused ? '#406AFF' : '#757575', fontSize: 12 }}>{label}</Text>
-          </TouchableOpacity>
-        );
-      })}
+          return (
+            <TouchableOpacity
+              key={route.key}
+              onPress={onPress}
+              style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <AntDesign
+                name={
+                  label === 'Home'
+                    ? 'home'
+                    : label === 'Learn'
+                      ? 'book'
+                      : label === 'Calendar'
+                        ? 'calendar'
+                        : 'user'
+                }
+                size={28}
+                color={isFocused ? '#406AFF' : '#757575'}
+              />
+              <Text style={{ color: isFocused ? '#406AFF' : '#757575', fontSize: 12 }}>
+                {label}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
     </View>
   );
 };

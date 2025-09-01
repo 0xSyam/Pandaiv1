@@ -1,5 +1,13 @@
 import { Stack, useRouter } from 'expo-router';
-import { ScrollView, StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 // Dummy data for the cards
@@ -19,12 +27,12 @@ const recommendedData = [
 ];
 
 const recentData = [
-    {
-        title: 'Biologi',
-        subtitle: 'Fotosintensis',
-        image: require('../../assets/icon.png'), // Placeholder for image
-    }
-]
+  {
+    title: 'Biologi',
+    subtitle: 'Fotosintensis',
+    image: require('../../assets/icon.png'), // Placeholder for image
+  },
+];
 
 export default function Home() {
   const router = useRouter();
@@ -34,9 +42,21 @@ export default function Home() {
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Create A Better Future{'\n'}For Your Self Today</Text>
-          <TouchableOpacity style={styles.notificationButton} onPress={() => router.push('/notification')}>
-            <Icon name="bells" size={24} color="white" />
-          </TouchableOpacity>
+          <View style={styles.headerButtons}>
+            <TouchableOpacity style={styles.menuButton} onPress={() => router.push('/(tabs)/menu')}>
+              <Icon name="barschart" size={20} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.funfactButton}
+              onPress={() => router.push('/(tabs)/random-funfact')}>
+              <Icon name="bulb1" size={20} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.notificationButton}
+              onPress={() => router.push('/notification')}>
+              <Icon name="bells" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.searchSection}>
@@ -124,6 +144,26 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: '#090F24',
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  menuButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#10B981',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  funfactButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#F39C12',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   notificationButton: {
     width: 50,

@@ -10,21 +10,52 @@ import {
   Dimensions,
   ActivityIndicator,
   Animated,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import * as Haptics from 'expo-haptics';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 
 const { width, height } = Dimensions.get('window');
 
 export default function ScanScreen() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [isAISpeaking, setIsAISpeaking] = useState(false);
+  const [isChatMode, setIsChatMode] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      id: 1,
+      text: 'Fotosintesis merupakan bagian terpenting dari proses kehidupan. Dari proses ini terbentuk zat-zat organik yang sangat kita butuh untuk hidup. Oksigen (O₂) berubah menjadi beberapa poin',
+      isAI: true,
+    },
+    {
+      id: 2,
+      text: 'menariknya hasil fotosintesis apa saja',
+      isAI: false,
+    }
+  ]);
+  const [inputText, setInputText] = useState('');
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
   const router = useRouter();
+
+  // Update global state when chat mode changes for tab bar access
+  useFocusEffect(
+    React.useCallback(() => {
+      // Set global chat mode indicator that tab bar can access
+      (global as any).scanChatMode = isChatMode;
+    }, [isChatMode])
+  );
+
+  // Debug: Monitor chat mode changes
+  useEffect(() => {
+    console.log('Chat mode changed:', isChatMode);
+  }, [isChatMode]);
 
   // Animation untuk gelombang suara
   const waveAnimations = useRef(
@@ -106,16 +137,42 @@ export default function ScanScreen() {
   };
 
   const handleActionButton = (action: string) => {
+    console.log('Action button pressed:', action);
     Haptics.selectionAsync();
     
     if (action === 'Chat') {
-      // Navigate to chat mode or open chat interface
-      Alert.alert('Chat', 'Opening AI chat interface...');
+      console.log('Setting chat mode to true');
+      setIsChatMode(true);
+    } else if (action === 'CloseChat') {
+      console.log('Setting chat mode to false');
+      setIsChatMode(false);
     } else if (action === 'Camera') {
       // Toggle camera on/off
       Alert.alert('Camera', 'Camera toggle feature will be implemented');
     } else {
       Alert.alert(action, `${action} feature will be implemented`);
+    }
+  };
+
+  const handleSendMessage = () => {
+    if (inputText.trim()) {
+      const newMessage = {
+        id: chatMessages.length + 1,
+        text: inputText.trim(),
+        isAI: false,
+      };
+      setChatMessages([...chatMessages, newMessage]);
+      setInputText('');
+      
+      // Simulate AI response
+      setTimeout(() => {
+        const aiResponse = {
+          id: chatMessages.length + 2,
+          text: 'Hasil fotosintesis utama adalah glukosa dan oksigen. Proses ini sangat penting untuk kehidupan di bumi.',
+          isAI: true,
+        };
+        setChatMessages(prev => [...prev, aiResponse]);
+      }, 1000);
     }
   };
 
@@ -144,47 +201,107 @@ export default function ScanScreen() {
           </View>
         </SafeAreaView>
 
-        {/* Center Animated Waveform */}
-        <View style={styles.centerContainer}>
-          <TouchableOpacity 
-            style={styles.waveformContainer}
-            onPress={handleAIToggle}
-            activeOpacity={0.8}
+        {/* Center Content - Waveform or Chat */}
+        {!isChatMode ? (
+          <View style={styles.centerContainer}>
+            <TouchableOpacity 
+              style={styles.waveformContainer}
+              onPress={handleAIToggle}
+              activeOpacity={0.8}
+            >
+              {waveAnimations.map((animation, index) => (
+                <Animated.View
+                  key={index}
+                  style={[
+                    styles.waveBar,
+                    {
+                      height: animation.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [15, 80],
+                      }),
+                      backgroundColor: isAISpeaking ? '#EF4444' : '#FFFFFF',
+                      opacity: isAISpeaking ? 0.9 : 0.6,
+                    }
+                  ]}
+                />
+              ))}
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <KeyboardAvoidingView 
+            style={styles.chatContainer}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           >
-            {waveAnimations.map((animation, index) => (
-              <Animated.View
-                key={index}
-                style={[
-                  styles.waveBar,
-                  {
-                    height: animation.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [15, 80],
-                    }),
-                    backgroundColor: isAISpeaking ? '#EF4444' : '#FFFFFF',
-                    opacity: isAISpeaking ? 0.9 : 0.6,
-                  }
-                ]}
+            <ScrollView style={styles.chatMessages} showsVerticalScrollIndicator={false}>
+              {chatMessages.map((message) => (
+                <View
+                  key={message.id}
+                  style={[
+                    styles.messageBubble,
+                    message.isAI ? styles.aiMessage : styles.userMessage
+                  ]}
+                >
+                  <Text style={[
+                    styles.messageText,
+                    message.isAI ? styles.aiMessageText : styles.userMessageText
+                  ]}>
+                    {message.text}
+                  </Text>
+                </View>
+              ))}
+            </ScrollView>
+            
+            <View style={styles.chatInputContainer}>
+              <TextInput
+                style={styles.chatInput}
+                value={inputText}
+                onChangeText={setInputText}
+                placeholder="Type Here..."
+                placeholderTextColor="#9CA3AF"
+                multiline
               />
-            ))}
-          </TouchableOpacity>
-        </View>
+              <TouchableOpacity 
+                style={styles.sendButton}
+                onPress={handleSendMessage}
+              >
+                <MaterialIcons name="send" size={24} color="white" />
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        )}
 
         {/* Right Side Vertical Action Buttons */}
         <View style={styles.rightSideActions}>
-          <TouchableOpacity 
-            style={styles.sideActionButton}
-            onPress={() => handleActionButton('Chat')}
-          >
-            <MaterialIcons name="chat" size={24} color="white" />
-          </TouchableOpacity>
+          {!isChatMode ? (
+            <>
+              <TouchableOpacity 
+                style={styles.sideActionButton}
+                onPress={() => handleActionButton('Chat')}
+              >
+                <MaterialIcons name="chat" size={24} color="white" />
+              </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={styles.sideActionButton}
-            onPress={() => handleActionButton('Camera')}
-          >
-            <MaterialIcons name="videocam" size={24} color="white" />
-          </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.sideActionButton}
+                onPress={() => handleActionButton('Camera')}
+              >
+                <MaterialIcons name="videocam" size={24} color="white" />
+              </TouchableOpacity>
+            </>
+          ) : (
+            <TouchableOpacity 
+              style={styles.sideActionButton}
+              onPress={() => {
+                console.log('Close button pressed - before action');
+                handleActionButton('CloseChat');
+                console.log('Close button pressed - after action');
+              }}
+              activeOpacity={0.7}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <MaterialIcons name="close" size={24} color="white" />
+            </TouchableOpacity>
+          )}
         </View>
       </CameraView>
     </View>
@@ -383,6 +500,64 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
+  },
+  chatContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  chatMessages: {
+    flex: 1,
+    marginBottom: 20,
+  },
+  messageBubble: {
+    maxWidth: '80%',
+    marginVertical: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  aiMessage: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#406AFF',
+  },
+  userMessage: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#334155',
+  },
+  messageText: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  aiMessageText: {
+    color: 'white',
+  },
+  userMessageText: {
+    color: 'white',
+  },
+  chatInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingBottom: 40,
+    gap: 12,
+  },
+  chatInput: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    maxHeight: 100,
+    color: '#333',
+  },
+  sendButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#406AFF',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bottomCenterContainer: {
     position: 'absolute',

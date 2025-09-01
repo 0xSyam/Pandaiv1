@@ -1,7 +1,7 @@
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { Link } from 'expo-router';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import TabBarBackground from './TabBarBackground';
@@ -14,6 +14,17 @@ interface CustomTabBarProps {
 
 const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigation }) => {
   const activeRouteName = state.routes[state.index].name;
+  const [chatMode, setChatMode] = useState(false);
+
+  // Check global chat mode state
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const globalChatMode = (global as any).scanChatMode || false;
+      setChatMode(globalChatMode);
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (activeRouteName === 'profile') {
     return null;
@@ -66,7 +77,7 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
                   marginBottom: 70,
                   padding: 9.387,
                 }}>
-                {isFocused ? (
+                {isFocused && !chatMode ? (
                   <MaterialIcons
                     name="mic"
                     size={30}

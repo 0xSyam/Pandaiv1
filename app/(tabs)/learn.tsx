@@ -3,19 +3,39 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from 
 import { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { learnSubjects, difficultyLevels } from '../../data/learnData';
+import GenerateModal from '../../components/GenerateModal';
 
 export default function Learn() {
   const router = useRouter();
   const [subject, setSubject] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleSubjectPress = (item: any) => {
     router.push(`/subject/${item.key}` as any);
   };
 
   const handleGenerate = () => {
-    // Logic untuk generate roadmap
-    console.log('Generating roadmap for:', subject, 'Difficulty:', selectedDifficulty);
+    // Tampilkan modal generate
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
+  const handleSelectSpecific = () => {
+    // Logic untuk specific roadmap
+    console.log('Generating specific roadmap for:', subject, 'Difficulty:', selectedDifficulty);
+    setModalVisible(false);
+    // Bisa redirect ke halaman specific roadmap atau tampilkan hasil
+  };
+
+  const handleSelectFull = () => {
+    // Logic untuk kurikulum full
+    console.log('Generating full curriculum for:', subject, 'Difficulty:', selectedDifficulty);
+    setModalVisible(false);
+    // Bisa redirect ke halaman full curriculum atau tampilkan hasil
   };
 
   return (
@@ -89,6 +109,13 @@ export default function Learn() {
             ))}
           </View>
         </View>
+
+        <GenerateModal
+          visible={modalVisible}
+          onClose={handleCloseModal}
+          onSelectSpecific={handleSelectSpecific}
+          onSelectFull={handleSelectFull}
+        />
       </ScrollView>
     </>
   );
